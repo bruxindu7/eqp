@@ -140,9 +140,12 @@ export default function Portfolio() {
 
           {/* 📊 Gráfico (receita líquida) */}
           <div className={styles.chartWrapper}>
-            {loading ? (
-              <p style={{ textAlign: "center", color: "#888" }}>Carregando...</p>
-            ) : (
+   {loading ? (
+  <div className={styles.loadingWrapper}>
+    <div className={styles.spinner}></div>
+    <p>Carregando dados do portfólio...</p>
+  </div>
+) : (
               <ResponsiveContainer width="100%" height={280}>
                 <AreaChart data={ganhosData}>
                   <defs>

@@ -136,3 +136,32 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.loadingWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* ocupa tela toda */
+  gap: 16px;
+  background: #000;
+  color: #dfdfdf; /* mesma cor do header */
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Círculo giratório */
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(99, 102, 241, 0.2); /* borda transparente */
+  border-top-color: #6366f1; /* cor principal */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.4);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

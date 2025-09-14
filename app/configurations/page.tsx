@@ -21,6 +21,7 @@ export default function ConfiguracoesPage() {
     email: string;
     role?: string;
   } | null>(null);
+  const [loading, setLoading] = useState(true); // 👈 estado de loading
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -29,7 +30,6 @@ export default function ConfiguracoesPage() {
       return;
     }
 
-    // 🔑 busca os dados reais do usuário
     fetch("/api/me", {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -45,8 +45,18 @@ export default function ConfiguracoesPage() {
           router.push("/login");
         }
       })
-      .catch(() => router.push("/login"));
+      .catch(() => router.push("/login"))
+      .finally(() => setLoading(false)); // 👈 encerra loading
   }, [router]);
+
+  // 👇 Tela de carregamento
+  if (loading)
+    return (
+      <div className={styles.loadingWrapper}>
+        <div className={styles.spinner}></div>
+        <p>Carregando...</p>
+      </div>
+    );
 
   if (!user) return null;
 
@@ -67,11 +77,15 @@ export default function ConfiguracoesPage() {
           <div className={styles.card}>
             <h3>Conta</h3>
             <div className={styles.formGroup}>
-              <label><LuUser /> Nome de usuário</label>
+              <label>
+                <LuUser /> Nome de usuário
+              </label>
               <input type="text" defaultValue={user.username} />
             </div>
             <div className={styles.formGroup}>
-              <label><LuMail /> Email</label>
+              <label>
+                <LuMail /> Email
+              </label>
               <input type="email" defaultValue={user.email} />
             </div>
           </div>
@@ -95,11 +109,15 @@ export default function ConfiguracoesPage() {
           <div className={styles.card}>
             <h3>Segurança</h3>
             <div className={styles.formGroup}>
-              <label><LuKey /> Alterar senha</label>
+              <label>
+                <LuKey /> Alterar senha
+              </label>
               <input type="password" placeholder="Nova senha" />
             </div>
             <div className={styles.formGroup}>
-              <label><LuShield /> 2FA (Autenticação em 2 fatores)</label>
+              <label>
+                <LuShield /> 2FA (Autenticação em 2 fatores)
+              </label>
               <button className={styles.btnPrimary}>Ativar</button>
             </div>
           </div>

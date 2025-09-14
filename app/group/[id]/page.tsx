@@ -35,7 +35,7 @@ interface Group {
 
 export default function GroupManagePage() {
   const router = useRouter();
-  const { id } = useParams(); // esse id é o nome do grupo
+  const { id } = useParams(); // nome do grupo
   const [group, setGroup] = useState<Group | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -61,7 +61,18 @@ export default function GroupManagePage() {
       router.push("/login");
       return;
     }
-    carregarGrupo();
+
+    // 🔑 Verifica o role do usuário
+    fetch("/api/me", { headers: { Authorization: `Bearer ${token}` } })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data?.role || (data.role !== "Admin" && data.role !== "Owner")) {
+          router.push("/group"); // 🚫 sem permissão
+        } else {
+          carregarGrupo();
+        }
+      })
+      .catch(() => router.push("/login"));
   }, [id, router]);
 
   useEffect(() => {

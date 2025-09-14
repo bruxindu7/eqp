@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Topbar from "@/components/Topbar";
 import Sidebar from "@/components/Sidebar";
 import styles from "../styles/Groups.module.css";
-import { LuUsers } from "react-icons/lu";
+import { LuUsers, LuSettings } from "react-icons/lu";
 import Select, { MultiValue } from "react-select";
 
 interface Group {
@@ -23,7 +23,7 @@ interface User {
 
 export default function GroupsPage() {
   const router = useRouter();
-  const [user, setUser] = useState<{ username: string } | null>(null);
+  const [user, setUser] = useState<{ username: string; email: string; role: string } | null>(null);
   const [groups, setGroups] = useState<Group[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
@@ -34,44 +34,48 @@ export default function GroupsPage() {
   });
   const [showModal, setShowModal] = useState(false);
 
-useEffect(() => {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    router.push("/login");
-  } else {
-    fetch("/api/me", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.username) {
-          setUser({ username: data.username });
-          carregarGrupos();  // só depois de pegar o user
-          carregarUsuarios();
-        } else {
-          router.push("/login");
-        }
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/login");
+    } else {
+      fetch("/api/me", {
+        headers: { Authorization: `Bearer ${token}` },
       })
-      .catch(() => router.push("/login"));
-  }
-}, [router]);
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.username) {
+            setUser({
+              username: data.username,
+              email: data.email,
+              role: data.role,
+            });
+            carregarGrupos();
+            carregarUsuarios();
+          } else {
+            router.push("/login");
+          }
+        })
+        .catch(() => router.push("/login"));
+    }
+  }, [router]);
 
-const carregarGrupos = async () => {
-  try {
-    const res = await fetch("/api/groups", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-    if (!res.ok) throw new Error("Erro ao carregar grupos");
-    const data = await res.json();
-    setGroups(data);
-  } catch (err) {
-    console.error("❌ Erro:", err);
-  } finally {
-    setLoading(false);
-  }
-};
+  const carregarGrupos = async () => {
+    try {
+      const res = await fetch("/api/groups", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      if (!res.ok) throw new Error("Erro ao carregar grupos");
+      const data = await res.json();
+      setGroups(data);
+    } catch (err) {
+      console.error("❌ Erro:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const carregarUsuarios = async () => {
     try {
@@ -156,54 +160,57 @@ const carregarGrupos = async () => {
               </div>
             </div>
           </div>
-   ) : (
-<div className={styles.grid}>
-  {groups.map((group) => (
-    <div key={group._id} className={styles.card}>
-      <div className={styles.cardTop}>
-        <div className={styles.groupHeader}>
-          {group.image ? (
-            <img
-              src={group.image}
-              alt={group.name}
-              className={styles.groupImage}
-            />
-          ) : (
-            <LuUsers className={styles.icon} />
-          )}
-          <h3>{group.name}</h3>
-        </div>
+        ) : (
+          <div className={styles.grid}>
+            {groups.map((group) => (
+              <div key={group._id} className={styles.card}>
+                <div className={styles.cardTop}>
+                  <div className={styles.groupHeader}>
+                    {group.image ? (
+                      <img
+                        src={group.image}
+                        alt={group.name}
+                        className={styles.groupImage}
+                      />
+                    ) : (
+                      <LuUsers className={styles.icon} />
+                    )}
+                    <h3>{group.name}</h3>
+                  </div>
 
-        <span
-          className={`${styles.status} ${
-            group.status === "Ativo" ? styles.rodando : styles.pausado
-          }`}
-        >
-          {group.status}
-        </span>
-      </div>
+                  <span
+                    className={`${styles.status} ${
+                      group.status === "Ativo" ? styles.rodando : styles.pausado
+                    }`}
+                  >
+                    {group.status}
+                  </span>
+                </div>
 
-{/* quantidade de membros com ícone */}
-<div className={styles.membersRow}>
-  <LuUsers className={styles.icon} />
-  <span>{group.members.length} membros</span>
-</div>
+                {/* quantidade de membros com ícone */}
+                <div className={styles.membersRow}>
+                  <LuUsers className={styles.icon} />
+                  <span>{group.members.length} membros</span>
+                </div>
 
-<div className={styles.actionsRow}>
-  <button
-    className={styles.btnAcao}
-    onClick={() => router.push(`/group/${encodeURIComponent(group.name)}`)}
-  >
-    Gerenciar
-  </button>
-</div>
-
-    </div>
-  ))}
-</div>
-
-)}
-
+                <div className={styles.actionsRow}>
+                  <button
+                    className={styles.btnAcao}
+                    onClick={() => {
+                      if (user?.role === "Admin" || user?.role === "Owner") {
+                        router.push(`/group/${encodeURIComponent(group.name)}`);
+                      }
+                    }}
+                    disabled={user?.role !== "Admin" && user?.role !== "Owner"}
+                  >
+                    <LuSettings style={{ marginRight: 6 }} />
+                    Gerenciar
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* MODAL CRIAR GRUPO */}
         {showModal && (

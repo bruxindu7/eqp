@@ -1,0 +1,284 @@
+.page {
+  display: flex;
+  min-height: 100vh;
+  background: #000;
+}
+
+.main {
+  margin-left: 310px;
+  margin-top: 75px;
+  padding: 30px;
+  flex-grow: 1;
+  color: #fff;
+}
+
+/* HEADER */
+.header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: #dfdfdf;
+}
+.header p {
+  color: #9f9f9f;
+  margin-top: 4px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  background: #000;
+  border: 1px solid #1b1b1b;
+  border-radius: 10px;
+  padding: 20px;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.3);
+}
+/* USERNAME E EMAIL */
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.username .role {
+  margin-left: 4px;
+}
+
+.email {
+  font-size: 13px;
+  color: #9f9f9f;
+  margin-top: 2px;
+}
+
+/* PERFIL */
+.userTop {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* borda fina */
+  color: #b6b6b6; /* letra cinza clara */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 20px;
+  flex-shrink: 0;
+  background: transparent; /* fundo vazio */
+}
+.role {
+  font-size: 12px;
+  background: rgba(132, 94, 247, 0.096);
+  border: 1px solid #391480;
+  color: #d1d1d1;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-weight: 500;
+}
+
+/* STATS */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+.stats div {
+  background: #000;
+  border: 1px solid #1b1b1b;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+}
+.stats h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+}
+.stats span {
+  font-size: 12px;
+  color: #9f9f9f;
+}
+/* ATIVIDADES - ESTILO TIMELINE */
+.activity {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: relative;
+}
+
+.activity::before {
+  content: "";
+  position: absolute;
+  left: 12px; /* mais pra esquerda */
+  top: 10px;
+  bottom: 0;
+  width: 2px;
+  background: rgba(99, 102, 241, 0.15);
+}
+
+.activity li {
+  position: relative;
+  padding-left: 42px; /* texto acompanha a linha */
+  font-size: 13px;
+  color: #ccc;
+  line-height: 1.5;
+}
+
+.activity li::before {
+  content: "";
+  position: absolute;
+  left: 4px; /* bolinha mais pra esquerda */
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  background: #0a0a0a;
+  border: 2px solid #6366f1;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.activityIcon {
+  position: absolute;
+  left: 6px; /* ícone centralizado dentro da bolinha */
+  top: 6px;
+  font-size: 11px;
+  color: #6366f1;
+  background: #000;
+  border-radius: 50%;
+}
+
+.activityTime {
+  font-size: 12px;
+  color: #777;
+  margin-left: 8px;
+}
+
+
+/* GRUPO */
+.integrationHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}.groupCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #000;
+  border: 1px solid #1b1b1b;
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.groupImage {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #1b1b1b;
+}
+
+.groupInfo {
+  flex-grow: 1;
+  margin-left: 12px;
+}
+.groupInfo h4 {
+  margin: 0;
+  font-size: 15px;
+  color: #fff;
+}
+.groupInfo p {
+  margin: 0;
+  font-size: 12px;
+  color: #9f9f9f;
+}
+
+.groupBtn {
+  background: #6366f1;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+.groupBtn:hover {
+  background: #4f46e5;
+}
+
+/* BADGES */
+.badge {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+.badgeSuccess {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+}
+.badgeDanger {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+.loadingWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* ocupa tela toda */
+  gap: 16px;
+  background: #000;
+  color: #dfdfdf; /* mesma cor do header */
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Círculo giratório */
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(99, 102, 241, 0.2); /* borda transparente */
+  border-top-color: #6366f1; /* cor principal */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.4);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

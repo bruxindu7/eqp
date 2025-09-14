@@ -1,0 +1,57 @@
+.sidebar {
+  position: fixed;
+  left: 30px; /* afasta da lateral */
+  top: 80px; /* afasta para baixo respeitando o Topbar */
+  width: 250px;
+  height: calc(83vh); /* ajusta altura para não passar do rodapé */
+  background-color: #000000;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px; /* cantos arredondados */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* sombra para flutuar */
+
+  /* 🔹 Nova borda */
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+}
+
+
+.sectionTitle {
+  font-size: 12px;
+  font-weight: bold;
+  color: #777;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  padding-left: 6px;
+}
+
+.navItem {
+  all: unset; /* reset total */
+  display: flex;
+  align-items: center;
+  width: 90%; /* largura fixa dentro do sidebar */
+  cursor: pointer;
+  color: #8d8d8d;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.navItem span {
+  flex-grow: 1;
+  margin-left: 12px;
+}
+
+.navItem:hover {
+  color: #fff;
+}
+
+.navItem.active {
+  color: #ffffff;
+}
+
+.navItem svg {
+  font-size: 16px;
+}

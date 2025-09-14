@@ -1,0 +1,381 @@
+.page {
+  display: flex;
+  min-height: 100vh;
+  background: #000;
+}
+
+.main {
+  margin-left: 310px;
+  margin-top: 75px;
+  padding: 30px;
+  flex-grow: 1;
+  color: #fff;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: #dfdfdf;
+}
+
+.header p {
+  color: #9f9f9f;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+/* GRID */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+/* CARD */
+.card {
+  background: #000;
+  border: 1px solid #1b1b1b;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  width: 340px;
+  max-width: 100%;
+}
+.card:hover {
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.3);
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cardTop h3 {
+  font-size: 16px;
+  color: #fff;
+  margin: 0;
+}
+
+.plataforma {
+  font-size: 13px;
+  color: #aaa;
+  margin: 0;
+}
+
+/* STATUS */
+.status {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+.ativa {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  border: 1px solid #22c55e;
+}
+.pausada {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid #ef4444;
+}
+
+/* INFO ROW */
+.infoRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #bbb;
+  font-size: 13px;
+}
+.icon {
+  font-size: 16px;
+  color: #6366f1;
+}
+
+/* BOTÕES */
+.btnAcao {
+  margin-top: 8px;
+  background: #111;
+  border: 1px solid #1b1b1b;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.btnAcao:hover {
+  background: #1a1a1a;
+  border-color: #2e2e2e;
+}
+
+.actionsRow {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* EMPTY STATE */
+.emptyState {
+  text-align: center;
+  margin-top: 60px;
+  color: #aaa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.emptyIcon {
+  font-size: 48px;
+  color: #6366f1;
+}
+.emptyGrid {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+/* DROPDOWN CUSTOM */
+.dropdown {
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.dropdownBtn {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7) !important;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #ddd;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.dropdownBtn:hover {
+  background: #1a1a1a;
+  border-color: #444;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7) !important;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 6px 0;
+  list-style: none;
+  margin: 0;
+  z-index: 100;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.dropdownItem {
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.icon {
+  font-size: 16px;
+  color: #6366f1; /* azul padrão */
+}
+
+.iconMoney {
+  font-size: 16px;
+  color: #22c55e; /* verde para valores brutos */
+}
+
+.iconNet {
+  font-size: 16px;
+  color: #facc15; /* amarelo/dourado para lucro líquido */
+}
+
+.dropdownItem:hover {
+  background: #131313;
+  color: #fff;
+}
+
+.groupIcon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* BOTÕES PRINCIPAIS */
+.btnCriar {
+  background: #6366f1;
+  color: #fff;
+  font-weight: 500;
+    font-size: 14px;
+
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.btnCriar:hover {
+  background: #4f46e5;
+}
+
+/* MODAL */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.041);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  animation: fadeIn 0.2s ease;
+}
+.modal {
+  background: rgba(0, 0, 0, 0);
+  border: 1px solid #1b1b1b;
+  border-radius: 12px;
+  padding: 24px;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: #fff;
+  animation: slideUp 0.25s ease;
+}
+.modal h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+.modal input {
+  background: rgba(0, 0, 0, 0);
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  color: #fff;
+}
+.modal input:focus {
+  border-color: #6366f1;
+  outline: none;
+}
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.btnCancelar {
+  background: #1a1a1a;
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #aaa;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.btnCancelar:hover {
+  background: #2a2a2a;
+  color: #fff;
+}
+.btnConfirmar {
+  background: #6366f1;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.btnConfirmar:hover {
+  background: #4f46e5;
+}
+
+/* INTEGRAÇÃO */
+.integrationCard {
+  background: #000;
+  border: 1px solid #1b1b1b;
+  border-radius: 8px;
+  padding: 20px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.integrationHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.integrationIcon {
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+  border-radius: 8px;
+  font-size: 22px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.integrationTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+.integrationDesc {
+  font-size: 13px;
+  color: #aaa;
+  margin: 0;
+}
+.integrationActions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+/* ANIMAÇÕES */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

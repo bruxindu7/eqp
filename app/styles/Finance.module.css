@@ -1,0 +1,227 @@
+.page {
+  display: flex;
+  min-height: 100vh;
+  background: #000;
+}
+
+.main {
+  margin-left: 310px;
+  margin-top: 75px;
+  padding: 30px;
+  flex-grow: 1;
+  color: #fff;
+}
+
+/* HEADER */
+.header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: #dfdfdf;
+}
+.header p {
+  color: #9f9f9f;
+  margin-top: 4px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+/* PAGINAÇÃO */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.pageBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #1b1b1b;
+  background: #000;
+  color: #bbb;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.pageBtn:hover {
+  border-color: #999999;
+  color: #fff;
+  background: rgba(228, 228, 228, 0.1);
+  box-shadow: 0 0 6px rgba(168, 168, 168, 0.5);
+}
+
+.activePage {
+  background: #808080;
+  border-color: #999999;
+  color: #080808;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(156, 156, 156, 0.6);
+}
+
+/* KPIs */
+.kpis {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+.kpiCard {
+  flex: 1;
+  min-width: 200px;
+  background: #000;
+  border: 1px solid #1b1b1b;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.kpiIcon {
+  font-size: 22px;
+}
+.iconGreen {
+  color: #22c55e;
+}
+.iconPurple {
+  color: #6366f1;
+}
+.kpiCard p {
+  color: #bbb;
+  font-size: 12px;
+  margin: 0;
+}
+.kpiCard h2 {
+  font-size: 18px;
+  margin: 2px 0 0;
+  color: #fff;
+}
+/* Header da tabela com filtro */
+.tableHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.filterSelect {
+  background: #000;
+  border: 1px solid #1b1b1b;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+/* Badge de pendente */
+.badgePending {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+/* TABELA */
+.tableCard {
+  background: #000;
+  border: 1px solid #1b1b1b;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+.tableCard h3 {
+  font-size: 14px;
+  margin-bottom: 16px;
+  color: #dfdfdf;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  text-align: left;
+  padding: 12px 10px;
+  font-size: 13px;
+}
+.table th {
+  color: #999;
+  font-weight: 500;
+  border-bottom: 1px solid #1b1b1b;
+}
+.table td {
+  color: #ddd;
+  border-bottom: 1px solid #1b1b1b;
+}
+
+/* BADGES */
+.badge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.badgeSuccess {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+}
+.badgeDanger {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+/* Dropdown custom */
+.dropdown {
+  position: relative;
+}
+
+.dropdownBtn {
+  background: #000;
+  border: 1px solid #1b1b1b;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: border 0.2s;
+}
+
+.dropdownBtn:hover {
+  border-color: #6366f1;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: #0a0a0a;
+  border: 1px solid #1b1b1b;
+  border-radius: 6px;
+  list-style: none;
+  padding: 6px 0;
+  margin: 0;
+  min-width: 140px;
+  z-index: 20;
+}
+
+.dropdownMenu li {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dropdownMenu li:hover {
+  background: rgba(99, 102, 241, 0.2);
+}

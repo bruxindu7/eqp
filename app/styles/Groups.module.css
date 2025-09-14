@@ -1,0 +1,427 @@
+.page {
+  display: flex;
+  min-height: 100vh;
+  background: #000;
+}
+
+.main {
+  margin-left: 310px;
+  margin-top: 75px;
+  padding: 30px;
+  flex-grow: 1;
+  color: #fff;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: #dfdfdf;
+}
+.header p {
+  color: #9f9f9f;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+/* GRID */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+/* CARD */
+.card {
+  background: #000;
+  border: 1px solid #1b1b1b;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  width: 340px;
+  max-width: 100%;
+}
+.card:hover {
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.3);
+}
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cardTop h3 {
+  font-size: 16px;
+  color: #fff;
+  margin: 0;
+}
+.plataforma {
+  font-size: 13px;
+  color: #aaa;
+  margin: 0;
+}
+/* FORM GROUP */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formGroup label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #cacaca;
+  margin-bottom: 2px;
+}
+
+.formGroup input {
+  background: rgba(0, 0, 0, 0.7) !important;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  color: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.formGroup input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 6px rgba(99, 102, 241, 0.3);
+  outline: none;
+}
+
+/* STATUS */
+.status {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+.rodando {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  border: 1px solid #22c55e;
+}
+.pausado {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid #ef4444;
+}
+
+/* INFO ROW */
+.infoRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #bbb;
+  font-size: 13px;
+}
+.icon {
+  font-size: 16px;
+  color: #6366f1;
+}
+
+/* BOTÕES */
+.btnAcao {
+  margin-top: 8px;
+  background: #111;
+  border: 1px solid #1b1b1b;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.btnAcao:hover {
+  background: #1a1a1a;
+  border-color: #2e2e2e;
+}
+.btnCriar {
+  background: #6366f1;
+  color: #fff;
+  font-weight: 500;
+  border: none;
+    font-size: 14px;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.btnCriar:hover {
+  background: #4f46e5;
+}
+
+/* EMPTY STATE */
+.emptyGrid {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+.integrationCard {
+  background: #000;
+  border: 1px solid #1b1b1b;
+  border-radius: 8px;
+  padding: 20px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.integrationHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.integrationIcon {
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+  border-radius: 8px;
+  font-size: 22px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.integrationTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+.integrationDesc {
+  font-size: 13px;
+  color: #aaa;
+  margin: 0;
+}
+.integrationActions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.groupHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px; /* 🔹 espaço após o header */
+}
+
+.groupImage {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #2a2a2a;
+}
+
+.icon {
+  font-size: 18px;
+  color: #6366f1;
+}
+
+
+/* MODAL */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  animation: fadeIn 0.2s ease;
+}
+.modal {
+  background: rgba(0, 0, 0, 0.7) !important;
+  border: 1px solid #1b1b1b;
+  border-radius: 12px;
+  padding: 24px;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: #fff;
+  animation: slideUp 0.25s ease;
+}
+.modal h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  color: #fff;
+}
+.modal input {
+  background: transparent;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  color: #fff;
+}
+.modal input:focus {
+  border-color: #696969;
+  outline: none;
+}
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+.btnCancelar {
+  background: #1a1a1a;
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #aaa;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.btnCancelar:hover {
+  background: #2a2a2a;
+  color: #fff;
+}
+.btnConfirmar {
+  background: #6366f1;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.btnConfirmar:hover {
+  background: #4f46e5;
+}
+.membersRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #aaa;
+  margin: 0;
+}
+
+.membersRow .icon {
+  font-size: 17px;
+  color: #6366f1;
+}
+
+/* ANIMAÇÕES */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ========================
+   ESTILO DO REACT-SELECT (DARK)
+======================== */
+:global(.react-select__control) {
+  background: rgba(0, 0, 0, 0.7) !important;
+  border: 1px solid #1b1b1b !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+  min-height: 42px !important;
+  box-shadow: none !important;
+}
+
+:global(.react-select__control--is-focused) {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 6px rgba(99, 102, 241, 0.4) !important;
+}
+
+:global(.react-select__single-value) {
+  color: #fff !important;
+}
+
+:global(.react-select__menu) {
+  background: rgb(0, 0, 0) !important;
+  border: 1px solid #1b1b1b !important;
+  border-radius: 6px !important;
+  margin-top: 6px !important;
+  z-index: 9999 !important;
+}
+
+:global(.react-select__option) {
+  background: transparent !important;
+  color: #ccc !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+  padding: 8px 12px !important;
+}
+
+:global(.react-select__option--is-focused) {
+  background: oklch(100% 0.00011 271.152 / 0.034) !important; /* fundo claro translúcido */
+  color: #fff !important;
+}
+
+:global(.react-select__option--is-selected) {
+  background: oklch(65.004% 0.00007 271.152 / 0.199) !important; /* fundo escuro translúcido */
+  color: #fff !important;
+}
+
+
+:global(.react-select__multi-value) {
+  background: oklch(100% 0.00011 271.152 / 0.089) !important;
+  border-radius: 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 2px 6px !important;
+}
+
+:global(.react-select__multi-value__label) {
+  color: #fff !important;
+  font-size: 13px !important;
+  padding: 0 !important;
+}
+
+:global(.react-select__multi-value__remove) {
+  color: #b3b3b3 !important;
+  margin-left: 4px !important;
+  cursor: pointer !important;
+}
+
+:global(.react-select__multi-value__remove:hover) {
+  background: none !important;  /* remove qualquer fundo */
+  color: #ffffff !important;    /* só a cor vermelha no hover */
+}
+
+:global(.react-select__indicator-separator) {
+  display: none !important;
+}
+
+/* Animação */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

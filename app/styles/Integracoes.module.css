@@ -1,0 +1,323 @@
+.page {
+  display: flex;
+  min-height: 100vh;
+  background: #000;
+}
+
+.main {
+  margin-left: 310px;
+  margin-top: 75px;
+  padding: 30px;
+  flex-grow: 1;
+  color: #fff;
+}
+
+/* HEADER */
+.header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: #dfdfdf;
+}
+.header p {
+  color: #9f9f9f;
+  margin-top: 4px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* GRID DE INTEGRAÇÕES */
+.integrationsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.integrationCard {
+  background: #000;
+  border: 1px solid #1b1b1b;
+  border-radius: 10px;
+  padding: 20px;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.integrationCard:hover {
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.3);
+}
+
+.integrationHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.integrationIcon {
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+  border-radius: 8px;
+  font-size: 22px;
+  padding: 8px;
+}
+
+.integrationInfo h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #fff;
+}
+.integrationInfo p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #bbb;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+.badgeSuccess {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+}
+.badgeDanger {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+/* BOTÕES */
+.integrationActions {
+  display: flex;
+  gap: 10px;
+}
+
+.btnPrimary {
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  font-size: 13px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s ease;
+}
+
+.btnPrimary:hover {
+  background: #4f46e5;
+}
+
+.btnGhost {
+  background: transparent;
+  border: 1px solid #1b1b1b;
+  color: #bbb;
+  padding: 8px 14px;
+  font-size: 13px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnGhost:hover {
+  border-color: #6366f1;
+  color: #fff;
+}
+/* Overlay cobrindo toda a tela com blur */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.781); /* escurece */
+  backdrop-filter: blur(42px);      /* aplica blur */
+  -webkit-backdrop-filter: blur(42px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* Caixa modal */
+.modal {
+  background: rgba(0, 0, 0, 0.651); /* transparente com efeito vidro */
+  border: 1px solid rgba(124, 124, 124, 0.3);
+  border-radius: 12px;
+  padding: 24px;
+  width: 420px;
+  max-width: 90%;
+  animation: fadeIn 0.25s ease;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+.modal h2 {
+  margin: 0 0 26px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 26px; /* espaçamento entre os grupos */
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  font-size: 14px;
+  color: #cacaca;
+  margin-bottom: 6px; /* bem colado no input */
+}
+
+.formGroup input {
+  background: rgba(0, 0, 0, 0.651); /* transparente com efeito vidro */
+  border: 1px solid #1b1b1b;
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border 0.2s ease;
+}
+
+.formGroup input:focus {
+  border-color: #646464;
+  outline: none;
+}
+
+
+/* Ações do modal */
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* Botões */
+.btnPrimary {
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  font-size: 13px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+.btnPrimary:hover {
+  background: #4f46e5;
+}
+
+.btnGhost {
+  background: transparent;
+  border: 1px solid #1b1b1b;
+  color: #bbb;
+  padding: 8px 14px;
+  font-size: 13px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btnGhost:hover {
+  border-color: #6366f1;
+  color: #fff;
+}
+/* ========================
+   ESTILO DO REACT-SELECT (DARK)
+======================== */
+:global(.react-select__control) {
+  background: rgba(0, 0, 0, 0.7) !important;
+  border: 1px solid #1b1b1b !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+  min-height: 42px !important;
+  box-shadow: none !important;
+}
+
+:global(.react-select__control--is-focused) {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 6px rgba(99, 102, 241, 0.4) !important;
+}
+
+:global(.react-select__single-value) {
+  color: #fff !important;
+}
+
+:global(.react-select__menu) {
+  background: rgb(0, 0, 0) !important;
+  border: 1px solid #1b1b1b !important;
+  border-radius: 6px !important;
+  margin-top: 6px !important;
+  z-index: 9999 !important;
+}
+
+:global(.react-select__option) {
+  background: transparent !important;
+  color: #ccc !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+  padding: 8px 12px !important;
+}
+
+:global(.react-select__option--is-focused) {
+  background: oklch(100% 0.00011 271.152 / 0.034) !important; /* fundo claro translúcido */
+  color: #fff !important;
+}
+
+:global(.react-select__option--is-selected) {
+  background: oklch(65.004% 0.00007 271.152 / 0.199) !important; /* fundo escuro translúcido */
+  color: #fff !important;
+}
+
+
+:global(.react-select__multi-value) {
+  background: oklch(100% 0.00011 271.152 / 0.089) !important;
+  border-radius: 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 2px 6px !important;
+}
+
+:global(.react-select__multi-value__label) {
+  color: #fff !important;
+  font-size: 13px !important;
+  padding: 0 !important;
+}
+
+:global(.react-select__multi-value__remove) {
+  color: #b3b3b3 !important;
+  margin-left: 4px !important;
+  cursor: pointer !important;
+}
+
+:global(.react-select__multi-value__remove:hover) {
+  background: none !important;  /* remove qualquer fundo */
+  color: #ffffff !important;    /* só a cor vermelha no hover */
+}
+
+:global(.react-select__indicator-separator) {
+  display: none !important;
+}
+
+/* Animação */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

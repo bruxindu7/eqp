@@ -1,0 +1,203 @@
+.page {
+  display: flex;
+  min-height: 100vh;
+  background: #000;
+}
+
+.main {
+  margin-left: 310px;
+  margin-top: 75px;
+  padding: 30px;
+  flex-grow: 1;
+  color: #fff;
+}
+
+.header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  color: #dfdfdf;
+}
+.header p {
+  color: #9f9f9f;
+  margin-top: 4px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* KPIs */
+.kpis {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+.kpiCard {
+  flex: 1;
+  min-width: 200px;
+  background: #000;
+  border: 1px solid #1b1b1b;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+.kpiCard:hover {
+  border-color: #2d2d2d;
+  background: #0a0a0a;
+}
+.kpiIcon {
+  font-size: 22px;
+  color: #6366f1;
+}
+.kpiCard p {
+  color: #bbb;
+  font-size: 12px;
+  margin: 0;
+}
+.kpiCard h2 {
+  font-size: 18px;
+  margin: 2px 0 0;
+  color: #fff;
+}
+
+/* Cards */
+.card {
+  background: #000;
+  border: 1px solid #1b1b1b;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.card h3 {
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: #dfdfdf;
+}
+
+/* Tables */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #1b1b1b;
+  text-align: left;
+  font-size: 14px;
+}
+.table th {
+  color: #bbb;
+  font-weight: 500;
+}
+.table td {
+  color: #fff;
+}
+
+/* Badges */
+.badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.badgeAdmin {
+  background: #d408081e;
+  color: #f63b3b;
+}
+.badgeOwner {
+  background: #4f08d41e;
+  color: #6366f1;
+}
+.badgeMember {
+  background: #c7c7c71e;
+  color: #a5a5a5;
+}
+.customSelect {
+  position: relative;
+  width: 120px;
+  font-size: 13px;
+}
+
+.selected {
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  padding: 6px 12px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.selected:hover {
+  background: #181818;
+}
+
+.options {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  z-index: 20;
+}
+
+.options li {
+  padding: 6px 12px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.options li:hover {
+  background: #222;
+  color: #6366f1; /* verde Ledger style */
+}
+
+/* Botões de ação */
+.actionBtn {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #fff;
+  margin-right: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s ease;
+}
+
+.actionBtn:hover {
+  background: #2a2a2a;
+}
+
+.actionBtnDanger {
+  background: #2a0f0f;
+  border: 1px solid #ef4444;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #ef4444;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s ease;
+}
+
+.actionBtnDanger:hover {
+  background: #3a0f0f;
+}

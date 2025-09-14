@@ -1,0 +1,138 @@
+.page {
+  display: flex;
+  min-height: 100vh;
+  background: #000;
+}
+
+.main {
+  margin-left: 310px;
+  margin-top: 75px;
+  padding: 30px;
+  flex-grow: 1;
+  color: #fff;
+}
+
+/* HEADER */
+.header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: #dfdfdf;
+}
+.header p {
+  color: #9f9f9f;
+  margin-top: 4px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  background: #000;
+  border: 1px solid #1b1b1b;
+  border-radius: 10px;
+  padding: 20px;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.3);
+}
+
+/* FORM */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-top: 14px;
+}
+.formGroup label {
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #bbb;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.formGroup input {
+  background: #0a0a0a;
+  border: 1px solid #1b1b1b;
+  border-radius: 6px;
+  padding: 10px;
+  color: #fff;
+  font-size: 13px;
+}
+.formGroup input:focus {
+  border-color: #6366f1;
+  outline: none;
+}
+
+/* TOGGLES */
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #0a0a0a;
+  border: 1px solid #1b1b1b;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #bbb;
+}
+.toggle span {
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+/* BOTÃO */
+.btnPrimary {
+  background: #6366f1;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.btnPrimary:hover {
+  background: #4f46e5;
+}
+/* CHECKBOX CUSTOM */
+.toggle input[type="checkbox"] {
+  appearance: none; /* remove estilo padrão */
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #2a2a2a;
+  border-radius: 4px;
+  background: #0a0a0a;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.toggle input[type="checkbox"]:hover {
+  border-color: #6366f1;
+}
+
+.toggle input[type="checkbox"]:checked {
+  background: #6366f1;
+  border-color: #6366f1;
+}
+
+.toggle input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: #fff;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,78 @@
+.page {
+  display: flex;
+  min-height: 100vh;
+  background: #000;
+}
+
+.main {
+  margin-left: 310px;
+  margin-top: 75px;
+  padding: 30px;
+  flex-grow: 1;
+  color: #fff;
+}
+
+/* HEADER */
+.header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: #dfdfdf;
+}
+.header p {
+  color: #9f9f9f;
+  margin-top: 4px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* KPIs */
+.kpis {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+.kpiCard {
+  flex: 1;
+  min-width: 200px;
+  background: #000;
+  border: 1px solid #1b1b1b;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.kpiIcon {
+  font-size: 22px;
+  color: #6366f1;
+}
+.kpiCard p {
+  color: #bbb;
+  font-size: 12px;
+  margin: 0;
+}
+.kpiCard h2 {
+  font-size: 18px;
+  margin: 2px 0 0;
+  color: #fff;
+}
+
+/* Charts */
+.charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+.chartCard {
+  background: #000;
+  border: 1px solid #1b1b1b;
+  border-radius: 8px;
+  padding: 16px;
+}
+.chartCard h3 {
+  font-size: 14px;
+  margin: 0 0 12px;
+  color: #dfdfdf;
+}

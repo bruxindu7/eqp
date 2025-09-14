@@ -116,7 +116,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <img
-                  src="/laptop-2.avif"
+                  src="/image.png"
                   alt="Analytics Platform"
                   className={styles["showcase-image"]}
                 />

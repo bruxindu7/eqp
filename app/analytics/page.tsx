@@ -128,7 +128,7 @@ export default function AnalyticsPage() {
     const date = new Date(v.createdAt);
     const mes = date.toLocaleString("pt-BR", { month: "short" }).toLowerCase();
     if (mesesUltimos6.includes(mes)) {
-      if (v.status === "approved") {
+      if (v.status === "paid") {
         ganhosAprovadasPorMes[mes] += v.totalAmount || 0;
       } else if (v.status === "pending") {
         ganhosPendentesPorMes[mes] += v.totalAmount || 0;
@@ -166,7 +166,7 @@ export default function AnalyticsPage() {
             <LuActivity className={styles.kpiIcon} />
             <div>
               <p>Aprovadas ({summary?.countApproved || 0})</p>
-              <h2>{loading ? "..." : formatBRL(summary?.approved)}</h2>
+              <h2>{loading ? "..." : formatBRL(summary?.paid)}</h2>
             </div>
           </div>
           <div className={styles.kpiCard}>

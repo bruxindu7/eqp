@@ -41,12 +41,12 @@ export async function GET(req: Request) {
 
     if (sitesUsuario.length === 0) {
       return NextResponse.json({
-        approved: 0,
+        paid: 0,
         pending: 0,
         total: 0,
         net: 0,
-        countApproved: 0,
-        countPending: 0,
+        countpaid: 0,
+        countPaid: 0,
         totalCount: 0,
       });
     }
@@ -57,11 +57,11 @@ export async function GET(req: Request) {
       .find({ sourceSite: { $in: sitesUsuario } })
       .toArray();
 
-    let approved = 0;
+    let paid = 0;
     let pending = 0;
     let total = 0;
     let net = 0;
-    let countApproved = 0;
+    let countpaid = 0;
     let countPending = 0;
 
     docs.forEach((sale) => {
@@ -69,24 +69,24 @@ export async function GET(req: Request) {
       const totalAmount = Number(sale?.totalAmount) || 0;
       const netAmount = Number(sale?.netAmount) || 0;
 
-      if (status === "approved") {
-        approved += totalAmount;
+      if (status === "paid") {
+        paid += totalAmount;
         net += netAmount;
-        countApproved++;
+        countpaid++;
       } else if (status === "pending") {
         pending += totalAmount;
         countPending++;
       }
     });
 
-    total = approved;
+    total = paid;
 
     return NextResponse.json({
-      approved: Number(approved.toFixed(2)),
+      paid: Number(paid.toFixed(2)),
       pending: Number(pending.toFixed(2)),
       total: Number(total.toFixed(2)),
       net: Number(net.toFixed(2)),
-      countApproved,
+      countpaid,
       countPending,
       totalCount: docs.length,
     });

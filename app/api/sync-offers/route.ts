@@ -32,13 +32,13 @@ export async function POST(req: Request) {
       // conta quantas vendas aprovadas existem para o site da oferta
       const vendas = await db.collection("sales").countDocuments({
         sourceSite: oferta.site,
-        status: "approved",
+        status: "paid",
       });
 
       // soma total vendido líquido
       const docs = await db.collection("sales").find({
         sourceSite: oferta.site,
-        status: "approved",
+        status: "paid",
       }).toArray();
 
       const valorTotal = docs.reduce((acc, s) => acc + (Number(s.totalAmount) || 0), 0);

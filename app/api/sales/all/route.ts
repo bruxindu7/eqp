@@ -28,7 +28,7 @@ export async function GET(req: Request) {
     // 🔹 Retornar apenas vendas aprovadas, mais recentes primeiro
     const docs = await db
       .collection("sales")
-      .find({ status: "approved" })
+      .find({ status: "paid" })
       .sort({ createdAt: -1 })
       .toArray();
 

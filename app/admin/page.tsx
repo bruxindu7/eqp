@@ -34,7 +34,7 @@ interface Venda {
   _id: string;
   sourceSite: string;
   totalAmount: number;
-  status: string; // approved | pending
+  status: string; 
   createdAt: string;
 }
 
@@ -138,11 +138,11 @@ const res = await fetch("/api/sales/all", {
  // 📊 KPIs
 const totalUsuarios = users.length;
 const totalVendas = vendas.length;
-const aprovadas = vendas.filter((v) => v.status === "approved").length;
+const aprovadas = vendas.filter((v) => v.status === "paid").length;
 
 // receita líquida
 const receitaLiquida = vendas
-  .filter((v: any) => v.status === "approved" && v.netAmount)
+  .filter((v: any) => v.status === "paid" && v.netAmount)
   .reduce((acc: number, v: any) => acc + v.netAmount, 0);
 
 // 📈 Dados para gráfico (receita líquida)
@@ -161,7 +161,7 @@ vendas.forEach((v: any) => {
   const mes = new Date(v.createdAt)
     .toLocaleString("pt-BR", { month: "short" })
     .toLowerCase();
-  if (v.status === "approved" && mesesUltimos6.includes(mes)) {
+  if (v.status === "paid" && mesesUltimos6.includes(mes)) {
     ganhosPorMes[mes] += v.netAmount || 0;
   }
 });

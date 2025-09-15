@@ -117,7 +117,7 @@ export default function PerfilPage() {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data: Venda[] = await res.json();
-      setVendas(data.filter((v) => v.status === "approved"));
+      setVendas(data.filter((v) => v.status === "paid"));
     } catch {}
   };
 

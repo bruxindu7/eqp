@@ -83,7 +83,7 @@ export default function FinancePage() {
 
   const mapStatus = (status: string) => {
     switch (status) {
-      case "approved":
+      case "paid":
         return "Aprovada";
       case "pending":
         return "Pendente";
@@ -128,7 +128,7 @@ export default function FinancePage() {
               <h2>
                 {money(
                   vendas
-                    .filter((v) => v.status === "approved")
+                    .filter((v) => v.status === "paid")
                     .reduce((acc, v) => acc + v.totalAmount, 0)
                 )}
               </h2>
@@ -214,7 +214,7 @@ export default function FinancePage() {
                   <td>
                     <span
                       className={`${styles.badge} ${
-                        venda.status === "approved"
+                        venda.status === "paid"
                           ? styles.badgeSuccess
                           : venda.status === "pending"
                           ? styles.badgePending

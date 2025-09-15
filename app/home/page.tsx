@@ -69,7 +69,7 @@ const carregarVendas = async () => {
     });
     if (!res.ok) throw new Error("Erro ao carregar vendas");
     const data: Venda[] = await res.json();
-    setVendas(data.filter((v) => v.status === "approved")); // só aprovadas
+    setVendas(data.filter((v) => v.status === "paid")); // só aprovadas
   } catch (err) {
     console.error("❌ Erro ao carregar vendas:", err);
   } finally {

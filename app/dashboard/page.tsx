@@ -65,7 +65,7 @@ export default function Portfolio() {
       });
       if (!res.ok) throw new Error("Erro ao carregar vendas");
       const data: Venda[] = await res.json();
-      setVendas(data.filter((v) => v.status === "approved"));
+      setVendas(data.filter((v) => v.status === "paid"));
     } catch (err) {
       console.error("❌ Erro:", err);
     } finally {

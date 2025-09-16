@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import clientPromise from "@/lib/mongodb";
 import jwt from "jsonwebtoken";
 
-// 🔹 GET → listar ofertas do usuário autenticado, incluindo vendas e valores
 export async function GET(req: Request) {
   try {
     const authHeader = req.headers.get("authorization");
@@ -20,7 +19,7 @@ export async function GET(req: Request) {
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB);
 
-    // 1️⃣ pega todos os grupos onde o usuário é membro
+    // 1️⃣ grupos do usuário
     const grupos = await db
       .collection("groups")
       .find({ members: decoded.username })
@@ -28,7 +27,7 @@ export async function GET(req: Request) {
 
     const groupIds = grupos.map((g) => g._id.toString());
 
-    // 2️⃣ busca ofertas criadas pelo usuário OU vinculadas a grupos dele
+    // 2️⃣ ofertas do usuário ou vinculadas a grupos
     const ofertas = await db
       .collection("ofertas")
       .find({
@@ -40,19 +39,39 @@ export async function GET(req: Request) {
       .sort({ createdAt: -1 })
       .toArray();
 
-    // 3️⃣ normaliza os dados
-    const normalizadas = ofertas.map((o) => ({
-      _id: o._id,
-      nome: o.nome,
-      site: o.site,
-      status: o.status,
-      groupId: o.groupId || null,
-      vendas: o.vendas || 0,
-      receitaBruta: o.valorTotal || 0,
-      lucro: o.valorLiquido || 0,
-      createdAt: o.createdAt,
-      createdBy: o.createdBy,
-    }));
+    // 3️⃣ para cada oferta, buscar vendas pelo site (apenas status "paid")
+    const normalizadas = [];
+    for (const o of ofertas) {
+      const vendas = await db
+        .collection("sales")
+        .find({
+          sourceSite: o.site,
+          status: "paid", // ✅ só as pagas
+        })
+        .toArray();
+
+      const totalAmount = vendas.reduce(
+        (sum, v) => sum + (Number(v.totalAmount) || 0),
+        0
+      );
+      const netAmount = vendas.reduce(
+        (sum, v) => sum + (Number(v.netAmount) || 0),
+        0
+      );
+
+      normalizadas.push({
+        _id: o._id,
+        nome: o.nome,
+        site: o.site,
+        status: o.status,
+        groupId: o.groupId || null,
+        vendas: vendas.length,
+        receitaBruta: Number(totalAmount.toFixed(2)),
+        lucro: Number(netAmount.toFixed(2)),
+        createdAt: o.createdAt,
+        createdBy: o.createdBy,
+      });
+    }
 
     return NextResponse.json(normalizadas);
   } catch (err) {
@@ -60,7 +79,6 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "Erro interno" }, { status: 500 });
   }
 }
-
 // 🔹 POST → criar nova oferta
 export async function POST(req: Request) {
   try {

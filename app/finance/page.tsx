@@ -13,7 +13,7 @@ interface Venda {
   sourceSite: string;
   totalAmount: number;
   netAmount: number;
-  status: string; // pending | approved | failed
+  status: string; 
   createdAt: string;
 }
 
@@ -152,17 +152,19 @@ export default function FinancePage() {
             </div>
           </div>
 
-          {/* Total vendas */}
-          <div className={styles.kpiCard}>
-            <div className={`${styles.kpiIcon} ${styles.iconPurple}`}>
-              <LuTrendingUp />
-            </div>
-            <div>
-              <p>Total Vendas</p>
-              <h2>{vendas.length}</h2>
-            </div>
-          </div>
-        </div>
+        {/* Total vendas */}
+<div className={styles.kpiCard}>
+  <div className={`${styles.kpiIcon} ${styles.iconPurple}`}>
+    <LuTrendingUp />
+  </div>
+  <div>
+    <p>Total Vendas</p>
+    <h2>
+      {vendas.filter((v) => v.status === "paid").length}
+    </h2>
+  </div>
+</div>
+</div>
 
         {/* LISTA DE VENDAS */}
         <div className={styles.tableCard}>

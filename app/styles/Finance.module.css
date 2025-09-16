@@ -49,15 +49,13 @@
 }
 
 .pageBtn:hover {
-  border-color: #999999;
   color: #fff;
   background: rgba(228, 228, 228, 0.1);
   box-shadow: 0 0 6px rgba(168, 168, 168, 0.5);
 }
 
 .activePage {
-  background: #808080;
-  border-color: #999999;
+  background: #aaaaaa;
   color: #080808;
   font-weight: 600;
   box-shadow: 0 0 10px rgba(156, 156, 156, 0.6);
@@ -197,14 +195,14 @@
 }
 
 .dropdownBtn:hover {
-  border-color: #6366f1;
+  border-color: #4b4b4b;
 }
 
 .dropdownMenu {
   position: absolute;
   top: 110%;
   right: 0;
-  background: #0a0a0a;
+  background: #000;
   border: 1px solid #1b1b1b;
   border-radius: 6px;
   list-style: none;
@@ -223,5 +221,127 @@
 }
 
 .dropdownMenu li:hover {
-  background: rgba(99, 102, 241, 0.2);
+  background: rgba(90, 90, 90, 0.2);
+}
+/* MODAL */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.041);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal {
+  background: rgba(0, 0, 0, 0);
+  border: 1px solid #1b1b1b;
+  border-radius: 12px;
+  padding: 24px;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: #fff;
+  animation: slideUp 0.25s ease;
+}
+
+.modal h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.modal input {
+  background: rgba(0, 0, 0, 0);
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.modal input:focus {
+  border-color: #6366f1;
+  outline: none;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.btnCancelar {
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #aaa;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.btnCancelar:hover {
+  color: #fff;
+}
+
+.btnConfirmar {
+  background: #6366f1;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.btnConfirmar:hover {
+  background: #4f46e5;
+}
+
+/* ===========================
+   MODAL COMPRADOR
+=========================== */
+.buyerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.buyerInfo hr {
+  border: none;
+  border-top: 1px solid #777777;
+  margin: 10px 0;
+}
+
+.buyerInfo p {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.buyerInfo strong {
+  color: #fff;
+}
+.eyeBtn {
+  background: none;
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+  padding: 6px;
+  cursor: pointer;
+  color: #949494;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.eyeBtn:hover {
+  border-color: #6e6e6e;
 }

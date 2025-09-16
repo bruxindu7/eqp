@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Topbar from "@/components/Topbar";
 import Sidebar from "@/components/Sidebar";
 import styles from "../styles/Finance.module.css";
-import { LuWallet, LuTrendingUp, LuChevronDown } from "react-icons/lu";
+import { LuWallet, LuTrendingUp, LuChevronDown, LuEye } from "react-icons/lu";
 
 interface Venda {
   _id: string;
@@ -13,9 +13,16 @@ interface Venda {
   sourceSite: string;
   totalAmount: number;
   netAmount: number;
-  status: string; 
+  status: string;
   createdAt: string;
+  buyer?: {
+    name: string;
+    email: string;
+    phone?: string;
+    document?: string;
+  };
 }
+
 
 export default function FinancePage() {
   const router = useRouter();
@@ -25,7 +32,8 @@ export default function FinancePage() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [pagina, setPagina] = useState(1);
   const [vendas, setVendas] = useState<Venda[]>([]);
-  const porPagina = 9;
+const [vendaModal, setVendaModal] = useState<Venda | null>(null);
+  const porPagina = 8;
 
   // 🔹 Busca user real no /api/me
   useEffect(() => {
@@ -87,8 +95,6 @@ export default function FinancePage() {
         return "Aprovada";
       case "pending":
         return "Pendente";
-      case "failed":
-        return "Reprovada";
       default:
         return status;
     }
@@ -181,7 +187,7 @@ export default function FinancePage() {
               </button>
               {open && (
                 <ul className={styles.dropdownMenu}>
-                  {["Todos", "Aprovada", "Pendente", "Reprovada"].map((opcao) => (
+                  {["Todos", "Aprovada", "Pendente"].map((opcao) => (
                     <li
                       key={opcao}
                       className={filtro === opcao ? styles.activeItem : ""}
@@ -200,37 +206,90 @@ export default function FinancePage() {
           </div>
 
           <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Site</th>
-                <th>Valor</th>
-                <th>Status</th>
-                <th>Data</th>
-              </tr>
-            </thead>
-            <tbody>
-              {vendasPagina.map((venda) => (
-                <tr key={venda._id}>
-                  <td>{venda.sourceSite}</td>
-                  <td>{money(venda.totalAmount)}</td>
-                  <td>
-                    <span
-                      className={`${styles.badge} ${
-                        venda.status === "paid"
-                          ? styles.badgeSuccess
-                          : venda.status === "pending"
-                          ? styles.badgePending
-                          : styles.badgeDanger
-                      }`}
-                    >
-                      {mapStatus(venda.status)}
-                    </span>
-                  </td>
-                  <td>{new Date(venda.createdAt).toLocaleDateString("pt-BR")}</td>
-                </tr>
-              ))}
-            </tbody>
+           <thead>
+  <tr>
+    <th>Site</th>
+    <th>Comprador</th>
+    <th>Valor</th>
+    <th>Status</th>
+    <th>Data</th>
+    <th>Ações</th>
+  </tr>
+</thead>
+
+<tbody>
+  {vendasPagina.map((venda) => (
+    <tr key={venda._id}>
+      <td>{venda.sourceSite}</td>
+      <td>{venda.buyer?.name || "—"}</td>
+      <td>{money(venda.totalAmount)}</td>
+      <td>
+        <span
+          className={`${styles.badge} ${
+            venda.status === "paid"
+              ? styles.badgeSuccess
+              : venda.status === "pending"
+              ? styles.badgePending
+              : styles.badgeDanger
+          }`}
+        >
+          {mapStatus(venda.status)}
+        </span>
+      </td>
+<td>
+  {new Date(venda.createdAt).toLocaleDateString("pt-BR")} -{" "}
+  {new Date(venda.createdAt).toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  })}
+</td>
+      <td>
+<button
+  className={styles.eyeBtn}
+  onClick={() => setVendaModal(venda)}
+  title="Ver detalhes"
+>
+  <LuEye />
+</button>
+
+      </td>
+    </tr>
+  ))}
+</tbody>
           </table>
+{vendaModal && (
+  <div className={styles.modalOverlay} onClick={() => setVendaModal(null)}>
+    <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+      <h3>Detalhes da Venda</h3>
+
+      <div className={styles.buyerInfo}>
+        <p><strong>Nome:</strong> {vendaModal.buyer?.name || "—"}</p>
+        <p><strong>Email:</strong> {vendaModal.buyer?.email || "—"}</p>
+        <hr />
+        <p><strong>Valor:</strong> {money(vendaModal.totalAmount)}</p>
+        <p><strong>Status:</strong> {mapStatus(vendaModal.status)}</p>
+<p>
+  <strong>Data:</strong>{" "}
+  {new Date(vendaModal.createdAt).toLocaleDateString("pt-BR")} -{" "}
+  {new Date(vendaModal.createdAt).toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  })}
+</p>
+      </div>
+
+      <div className={styles.modalActions}>
+        <button
+          className={styles.btnCancelar}
+          onClick={() => setVendaModal(null)}
+        >
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
 
           {/* Paginação */}
           {totalPaginas > 1 && (

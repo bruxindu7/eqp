@@ -12,8 +12,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Payload inválido" }, { status: 400 });
     }
 
-    // 🔍 Origem do site (via tracking.site do checkout)
-    const sourceSite = data.tracking?.site || "desconhecido";
+    // 🔍 Origem do site (via tracking.ref do checkout)
+    const sourceSite = data.tracking?.ref || "desconhecido";
     console.log("🔎 Site de origem detectado:", sourceSite);
 
     // 🔌 Conexão com o MongoDB
@@ -45,7 +45,7 @@ export async function POST(req: Request) {
             document: data.buyer?.document || null,
           },
           tracking: data.tracking || {},
-          sourceSite, // ✅ campo de primeiro nível, continua igual
+          sourceSite, // ✅ salvo no nível raiz
           createdAt: data.created_at,
         },
       },

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Topbar from "@/components/Topbar";
 import Sidebar from "@/components/Sidebar";
@@ -23,17 +23,20 @@ interface Venda {
   };
 }
 
-
 export default function FinancePage() {
   const router = useRouter();
   const [user, setUser] = useState<{ username: string; email: string; role: string } | null>(null);
+
+  // Filtros
   const [filtro, setFiltro] = useState("Todos");
-  const [open, setOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const [pagina, setPagina] = useState(1);
+  const [filtroSite, setFiltroSite] = useState("Todos");
+
+  // Dropdowns abertos
+  const [openStatus, setOpenStatus] = useState(false);
+  const [openSite, setOpenSite] = useState(false);
+
   const [vendas, setVendas] = useState<Venda[]>([]);
-const [vendaModal, setVendaModal] = useState<Venda | null>(null);
-  const porPagina = 8;
+  const [vendaModal, setVendaModal] = useState<Venda | null>(null);
 
   // 🔹 Busca user real no /api/me
   useEffect(() => {
@@ -52,7 +55,7 @@ const [vendaModal, setVendaModal] = useState<Venda | null>(null);
               email: data.email,
               role: data.role,
             });
-            carregarVendas(); // só carrega vendas depois que o user foi validado
+            carregarVendas();
           } else {
             router.push("/login");
           }
@@ -76,10 +79,13 @@ const [vendaModal, setVendaModal] = useState<Venda | null>(null);
     }
   };
 
+  // Fecha dropdowns ao clicar fora
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setOpen(false);
+      const target = e.target as HTMLElement;
+      if (!target.closest(`.${styles.dropdown}`)) {
+        setOpenStatus(false);
+        setOpenSite(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -100,15 +106,17 @@ const [vendaModal, setVendaModal] = useState<Venda | null>(null);
     }
   };
 
-  // Filtra vendas
-  const vendasFiltradas =
+  // 🔹 Filtragem por status
+  const vendasFiltradasStatus =
     filtro === "Todos" ? vendas : vendas.filter((v) => mapStatus(v.status) === filtro);
 
-  // Paginação
-  const totalPaginas = Math.ceil(vendasFiltradas.length / porPagina);
-  const inicio = (pagina - 1) * porPagina;
-  const fim = inicio + porPagina;
-  const vendasPagina = vendasFiltradas.slice(inicio, fim);
+  // 🔹 Lista de sites
+  const sites = Array.from(new Set(vendas.map((v) => v.sourceSite)));
+
+  // 🔹 Filtragem final por site
+  const vendasFiltradas = vendasFiltradasStatus.filter((v) =>
+    filtroSite === "Todos" ? true : v.sourceSite === filtroSite
+  );
 
   return (
     <div className={styles.page}>
@@ -122,54 +130,49 @@ const [vendaModal, setVendaModal] = useState<Venda | null>(null);
           <p>Veja suas vendas e aprovações em tempo real.</p>
         </div>
 
-        {/* KPIs */}
-        <div className={styles.kpis}>
-          {/* Total aprovado */}
-          <div className={styles.kpiCard}>
-            <div className={`${styles.kpiIcon} ${styles.iconGreen}`}>
-              <LuWallet />
-            </div>
-            <div>
-              <p>Total Aprovado</p>
-              <h2>
-                {money(
-                  vendas
-                    .filter((v) => v.status === "paid")
-                    .reduce((acc, v) => acc + v.totalAmount, 0)
-                )}
-              </h2>
-            </div>
-          </div>
-
-          {/* Vendas pendentes */}
-          <div className={styles.kpiCard}>
-            <div className={`${styles.kpiIcon} ${styles.iconPurple}`}>
-              <LuWallet />
-            </div>
-            <div>
-              <p>Vendas Pendentes</p>
-              <h2>
-                {money(
-                  vendas
-                    .filter((v) => v.status === "pending")
-                    .reduce((acc, v) => acc + v.totalAmount, 0)
-                )}
-              </h2>
-            </div>
-          </div>
-
-        {/* Total vendas */}
-<div className={styles.kpiCard}>
-  <div className={`${styles.kpiIcon} ${styles.iconPurple}`}>
-    <LuTrendingUp />
+   {/* KPIs */}
+<div className={styles.kpis}>
+  <div className={styles.kpiCard}>
+    <div className={`${styles.kpiIcon} ${styles.iconGreen}`}>
+      <LuWallet />
+    </div>
+    <div>
+      <p>Total Aprovado</p>
+      <h2>
+        {money(
+          vendasFiltradas
+            .filter((v) => v.status === "paid")
+            .reduce((acc, v) => acc + v.totalAmount, 0)
+        )}
+      </h2>
+    </div>
   </div>
-  <div>
-    <p>Total Vendas</p>
-    <h2>
-      {vendas.filter((v) => v.status === "paid").length}
-    </h2>
+
+  <div className={styles.kpiCard}>
+    <div className={`${styles.kpiIcon} ${styles.iconPurple}`}>
+      <LuWallet />
+    </div>
+    <div>
+      <p>Vendas Pendentes</p>
+      <h2>
+        {money(
+          vendasFiltradas
+            .filter((v) => v.status === "pending")
+            .reduce((acc, v) => acc + v.totalAmount, 0)
+        )}
+      </h2>
+    </div>
   </div>
-</div>
+
+  <div className={styles.kpiCard}>
+    <div className={`${styles.kpiIcon} ${styles.iconPurple}`}>
+      <LuTrendingUp />
+    </div>
+    <div>
+      <p>Total Vendas</p>
+      <h2>{vendasFiltradas.filter((v) => v.status === "paid").length}</h2>
+    </div>
+  </div>
 </div>
 
         {/* LISTA DE VENDAS */}
@@ -177,132 +180,165 @@ const [vendaModal, setVendaModal] = useState<Venda | null>(null);
           <div className={styles.tableHeader}>
             <h3>Últimas Vendas</h3>
 
-            {/* Dropdown custom */}
-            <div className={styles.dropdown} ref={dropdownRef}>
-              <button
-                className={`${styles.dropdownBtn} ${open ? styles.open : ""}`}
-                onClick={() => setOpen(!open)}
-              >
-                {filtro} <LuChevronDown className={styles.chevron} />
-              </button>
-              {open && (
-                <ul className={styles.dropdownMenu}>
-                  {["Todos", "Aprovada", "Pendente"].map((opcao) => (
+            <div style={{ display: "flex", gap: "10px" }}>
+              {/* Dropdown Status */}
+              <div className={styles.dropdown}>
+                <button
+                  className={`${styles.dropdownBtn} ${openStatus ? styles.open : ""}`}
+                  onClick={() => {
+                    setOpenStatus(!openStatus);
+                    setOpenSite(false); // fecha o outro
+                  }}
+                >
+                  {filtro} <LuChevronDown className={styles.chevron} />
+                </button>
+                {openStatus && (
+                  <ul className={styles.dropdownMenu}>
+                    {["Todos", "Aprovada", "Pendente"].map((opcao) => (
+                      <li
+                        key={opcao}
+                        className={filtro === opcao ? styles.activeItem : ""}
+                        onClick={() => {
+                          setFiltro(opcao);
+                          setOpenStatus(false);
+                        }}
+                      >
+                        {opcao}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              {/* Dropdown Sites */}
+              <div className={styles.dropdown}>
+                <button
+                  className={`${styles.dropdownBtn} ${openSite ? styles.open : ""}`}
+                  onClick={() => {
+                    setOpenSite(!openSite);
+                    setOpenStatus(false); // fecha o outro
+                  }}
+                >
+                  {filtroSite === "Todos" ? "Todos os sites" : filtroSite}{" "}
+                  <LuChevronDown className={styles.chevron} />
+                </button>
+                {openSite && (
+                  <ul className={styles.dropdownMenu}>
                     <li
-                      key={opcao}
-                      className={filtro === opcao ? styles.activeItem : ""}
+                      className={filtroSite === "Todos" ? styles.activeItem : ""}
                       onClick={() => {
-                        setFiltro(opcao);
-                        setPagina(1);
-                        setOpen(false);
+                        setFiltroSite("Todos");
+                        setOpenSite(false);
                       }}
                     >
-                      {opcao}
+                      Todos os sites
                     </li>
-                  ))}
-                </ul>
-              )}
+                    {sites.map((site) => (
+                      <li
+                        key={site}
+                        className={filtroSite === site ? styles.activeItem : ""}
+                        onClick={() => {
+                          setFiltroSite(site);
+                          setOpenSite(false);
+                        }}
+                      >
+                        {site}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
           </div>
 
           <table className={styles.table}>
-           <thead>
-  <tr>
-    <th>Site</th>
-    <th>Comprador</th>
-    <th>Valor</th>
-    <th>Status</th>
-    <th>Data</th>
-    <th>Ações</th>
-  </tr>
-</thead>
+            <thead>
+              <tr>
+                <th>Site</th>
+                <th>Comprador</th>
+                <th>Valor</th>
+                <th>Status</th>
+                <th>Data</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
 
-<tbody>
-  {vendasPagina.map((venda) => (
-    <tr key={venda._id}>
-      <td>{venda.sourceSite}</td>
-      <td>{venda.buyer?.name || "—"}</td>
-      <td>{money(venda.totalAmount)}</td>
-      <td>
-        <span
-          className={`${styles.badge} ${
-            venda.status === "paid"
-              ? styles.badgeSuccess
-              : venda.status === "pending"
-              ? styles.badgePending
-              : styles.badgeDanger
-          }`}
-        >
-          {mapStatus(venda.status)}
-        </span>
-      </td>
-<td>
-  {new Date(venda.createdAt).toLocaleDateString("pt-BR")} -{" "}
-  {new Date(venda.createdAt).toLocaleTimeString("pt-BR", {
-    hour: "2-digit",
-    minute: "2-digit",
-  })}
-</td>
-      <td>
-<button
-  className={styles.eyeBtn}
-  onClick={() => setVendaModal(venda)}
-  title="Ver detalhes"
->
-  <LuEye />
-</button>
-
-      </td>
-    </tr>
-  ))}
-</tbody>
-          </table>
-{vendaModal && (
-  <div className={styles.modalOverlay} onClick={() => setVendaModal(null)}>
-    <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-      <h3>Detalhes da Venda</h3>
-
-      <div className={styles.buyerInfo}>
-        <p><strong>Nome:</strong> {vendaModal.buyer?.name || "—"}</p>
-        <p><strong>Email:</strong> {vendaModal.buyer?.email || "—"}</p>
-        <hr />
-        <p><strong>Valor:</strong> {money(vendaModal.totalAmount)}</p>
-        <p><strong>Status:</strong> {mapStatus(vendaModal.status)}</p>
-<p>
-  <strong>Data:</strong>{" "}
-  {new Date(vendaModal.createdAt).toLocaleDateString("pt-BR")} -{" "}
-  {new Date(vendaModal.createdAt).toLocaleTimeString("pt-BR", {
-    hour: "2-digit",
-    minute: "2-digit",
-  })}
-</p>
-      </div>
-
-      <div className={styles.modalActions}>
-        <button
-          className={styles.btnCancelar}
-          onClick={() => setVendaModal(null)}
-        >
-          Fechar
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
-
-          {/* Paginação */}
-          {totalPaginas > 1 && (
-            <div className={styles.pagination}>
-              {Array.from({ length: totalPaginas }, (_, i) => (
-                <button
-                  key={i + 1}
-                  className={`${styles.pageBtn} ${pagina === i + 1 ? styles.activePage : ""}`}
-                  onClick={() => setPagina(i + 1)}
-                >
-                  {i + 1}
-                </button>
+            <tbody>
+              {vendasFiltradas.map((venda) => (
+                <tr key={venda._id}>
+                  <td>{venda.sourceSite}</td>
+                  <td>{venda.buyer?.name || "—"}</td>
+                  <td>{money(venda.totalAmount)}</td>
+                  <td>
+                    <span
+                      className={`${styles.badge} ${
+                        venda.status === "paid"
+                          ? styles.badgeSuccess
+                          : venda.status === "pending"
+                          ? styles.badgePending
+                          : styles.badgeDanger
+                      }`}
+                    >
+                      {mapStatus(venda.status)}
+                    </span>
+                  </td>
+                  <td>
+                    {new Date(venda.createdAt).toLocaleDateString("pt-BR")} -{" "}
+                    {new Date(venda.createdAt).toLocaleTimeString("pt-BR", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </td>
+                  <td>
+                    <button
+                      className={styles.eyeBtn}
+                      onClick={() => setVendaModal(venda)}
+                      title="Ver detalhes"
+                    >
+                      <LuEye />
+                    </button>
+                  </td>
+                </tr>
               ))}
+            </tbody>
+          </table>
+
+          {/* MODAL */}
+          {vendaModal && (
+            <div className={styles.modalOverlay} onClick={() => setVendaModal(null)}>
+              <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+                <h3>Detalhes da Venda</h3>
+
+                <div className={styles.buyerInfo}>
+                  <p>
+                    <strong>Nome:</strong> {vendaModal.buyer?.name || "—"}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {vendaModal.buyer?.email || "—"}
+                  </p>
+                  <hr />
+                  <p>
+                    <strong>Valor:</strong> {money(vendaModal.totalAmount)}
+                  </p>
+                  <p>
+                    <strong>Status:</strong> {mapStatus(vendaModal.status)}
+                  </p>
+                  <p>
+                    <strong>Data:</strong>{" "}
+                    {new Date(vendaModal.createdAt).toLocaleDateString("pt-BR")} -{" "}
+                    {new Date(vendaModal.createdAt).toLocaleTimeString("pt-BR", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </p>
+                </div>
+
+                <div className={styles.modalActions}>
+                  <button className={styles.btnCancelar} onClick={() => setVendaModal(null)}>
+                    Fechar
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </div>

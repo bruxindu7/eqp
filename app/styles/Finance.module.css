@@ -127,14 +127,33 @@
   color: #f59e0b;
 }
 
-/* TABELA */
 .tableCard {
   background: #000;
   border: 1px solid #1b1b1b;
   border-radius: 8px;
   padding: 20px;
   margin-top: 20px;
+
+  /* 🔹 altura fixa: sempre cabe 6–8 linhas */
+  height: calc(8 * 55px + 120px); /* ~8 linhas + header/padding */
+  overflow-y: auto;
 }
+
+/* Scroll custom */
+.tableCard::-webkit-scrollbar {
+  width: 5px;
+}
+.tableCard::-webkit-scrollbar-track {
+  border-radius: 6px;
+}
+.tableCard::-webkit-scrollbar-thumb {
+  background: #1a1a1a;
+  border-radius: 6px;
+}
+.tableCard::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
 .tableCard h3 {
   font-size: 14px;
   margin-bottom: 16px;
